@@ -1,4 +1,4 @@
-#include "rubik_cube.h"
+#include "rubix_cube.h"
 
 SinglePiece::SinglePiece(){
     color[0] = RED;         //FRONT
@@ -41,7 +41,7 @@ RubixCube::RubixCube(){
     for(int x = 0; x < 3; x++){
         for(int y = 0; y < 3; y++){
             for(int z = 0; z < 3; z++){
-                SinglePiece p(x, y, z);
+                SinglePiece p;
                 cubes[x][y][z] = p;
             }
         }
@@ -96,5 +96,84 @@ void RubixCube::rotate_level(size_t n){
     temp.level_switch();            cubes[1][2][n] = temp;
 }
 
-void RubixCube::display(){
+void RubixCube::display(size_t x, size_t y, size_t z){
+    // FRONT
+    SinglePiece p = cubes[x][y][z];
+
+    glBegin(GL_POLYGON);
+        display_color(p.color[0]);
+        glVertex3f( 2.0, 0.0, 2.0 );
+        glVertex3f( 2.0, 2.0, 2.0 );
+        glVertex3f( 0.0, 2.0, 2.0 );
+        glVertex3f( 0.0, 0.0, 2.0 );
+    glEnd();
+        
+    // BACK
+    glBegin(GL_POLYGON);
+        display_color(p.color[1]);
+        glVertex3f( 2.0, 0.0, 0.0 );      
+        glVertex3f( 2.0, 2.0, 0.0 );      
+        glVertex3f( 0.0, 2.0, 0.0 );      
+        glVertex3f( 0.0, 0.0, 0.0 );     
+    glEnd();
+ 
+    // RIGHT
+    glBegin(GL_POLYGON);
+        display_color(p.color[2]);
+        glVertex3f( 2.0, 0.0, 0.0 );
+        glVertex3f( 2.0, 2.0, 0.0 );
+        glVertex3f( 2.0, 2.0, 2.0 );
+        glVertex3f( 2.0, 0.0, 2.0 );
+    glEnd();
+ 
+    // LEFT
+    glBegin(GL_POLYGON);
+        display_color(p.color[3]);
+        glVertex3f( 0.0, 0.0, 2.0 );
+        glVertex3f( 0.0, 2.0, 2.0 );
+        glVertex3f( 0.0, 2.0, 0.0 );
+        glVertex3f( 0.0, 0.0, 0.0 );
+    glEnd();
+ 
+    // TOP
+    glBegin(GL_POLYGON);
+        display_color(p.color[4]);
+        glVertex3f( 2.0, 2.0, 2.0 );
+        glVertex3f( 2.0, 2.0, 0.0 );
+        glVertex3f( 0.0, 2.0, 0.0 );
+        glVertex3f( 0.0, 2.0, 2.0 );
+    glEnd();
+ 
+    // BOTTOM
+    glBegin(GL_POLYGON);
+        display_color(p.color[5]);
+        glVertex3f( 2.0, 0.0, 0.0 );
+        glVertex3f( 2.0, 0.0, 2.0 );
+        glVertex3f( 0.0, 0.0, 2.0 );
+        glVertex3f( 0.0, 0.0, 0.0 );
+    glEnd();
+}
+
+
+void RubixCube::display_color(Color c){
+    switch(c){
+        case RED:
+            glColor3ub( 255, 000, 000 );  // red
+            break;
+        case ORANGE:
+            glColor3ub( 255, 165, 000 );  // orange
+            break;
+        case GREEN:
+            glColor3ub( 000, 255, 000 );  // green
+            break;
+        case BLUE:
+            glColor3ub( 000, 000, 255 );  // blue
+            break;
+        case YELLOW:
+            glColor3ub( 255, 255, 000 );  // yellow
+            break;
+        case WHITE:
+            glColor3ub( 255, 255, 255 );  // white
+            break;
+    }
 }

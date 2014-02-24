@@ -1,4 +1,13 @@
-#include<vector>
+#ifndef RUBIX_CUBE_H
+#define RUBIX_CUBE_H
+
+#if defined(__APPLE__) || defined(MACOSX)
+#   include <GLUT/glut.h>
+#else
+#   include <GL/glut.h>
+#endif
+
+#include <cstdlib>
 
 typedef enum _Color{
     RED = 0,    //FRONT
@@ -12,7 +21,7 @@ typedef enum _Color{
 
 class SinglePiece{
     public:
-        SinglePiece(size_t nx, size_t ny, size_t nz);
+        SinglePiece();
         Color color[6];
         void column_switch();
         void row_switch();
@@ -24,9 +33,12 @@ class RubixCube{
         RubixCube();
         void rotate_column(size_t n);
         void rotate_row(size_t n);
-        void rotate_level(size_t n):
-        void display();
+        void rotate_level(size_t n);
+        void display(size_t x, size_t y, size_t z);
     
     private:
         SinglePiece cubes[3][3][3];
-}
+        void display_color(Color c);
+};
+
+#endif
