@@ -57,8 +57,8 @@ void specialKeys( int key, int x, int y ) {
 
 
 void rotate_animation(GLfloat step){
-    for(int i = 0; i < 900000; i++){
-        if(i % 10000 == 0){
+    for(int i = 0; i < 90/step * 100; i+=1){
+        if(i % 100 == 0){
             rotate_angle += step;
             display();
         }
@@ -84,49 +84,49 @@ void keyboard(unsigned char key, int x, int y){
             exit(0);
         case 'q':
             rotate_c = 0; 
-            rotate_animation(1.0);
+            rotate_animation(3.0);
             main_cube->rotate_column(0);
             break;
         case 'w':
             rotate_c = 1; 
-            rotate_animation(1.0);
+            rotate_animation(3.0);
             main_cube->rotate_column(1);
             break;
         case 'e':
             rotate_c = 2; 
-            rotate_animation(1.0);
+            rotate_animation(3.0);
             main_cube->rotate_column(2);
             break;
 
         case 'a':
             rotate_r = 0;
-            rotate_animation(1.0);
+            rotate_animation(3.0);
             main_cube->rotate_row(0);
             break;
         case 's':
             rotate_r = 1;
-            rotate_animation(1.0);
+            rotate_animation(3.0);
             main_cube->rotate_row(1);
             break;
         case 'd':
             rotate_r = 2;
-            rotate_animation(1.0);
+            rotate_animation(3.0);
             main_cube->rotate_row(2);
             break;
         
         case 'z':
             rotate_l = 0;
-            rotate_animation(1.0);
+            rotate_animation(3.0);
             main_cube->rotate_level(0);
             break;
         case 'x':
             rotate_l = 1;
-            rotate_animation(1.0);
+            rotate_animation(3.0);
             main_cube->rotate_level(1);
             break;
         case 'c':
             rotate_l = 2;
-            rotate_animation(1.0);
+            rotate_animation(3.0);
             main_cube->rotate_level(2);
             break;
     }
@@ -205,7 +205,6 @@ int main(int argc, char *argv[]){
     glutInitWindowSize(800, 800);
     glutCreateWindow("Rubik's Cube");
     glutFullScreen();
-    //setupRC();
 
     init();
     init_cube();
@@ -214,8 +213,6 @@ int main(int argc, char *argv[]){
     glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);
     glutSpecialFunc(specialKeys);
-    //glutMouseFunc(mouse);
-   // glutMotionFunc(motion);
 
     glutMainLoop();
     

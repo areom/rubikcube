@@ -62,6 +62,8 @@ void RubixCube::rotate_column(size_t n){
     cubes[n][2][1].column_switch(); cubes[n][1][0] = cubes[n][2][1];
     cubes[n][1][2].column_switch(); cubes[n][2][1] = cubes[n][1][2];
     temp.column_switch();           cubes[n][1][2] = temp;
+
+    cubes[n][1][1].column_switch();
 }
 
 
@@ -78,6 +80,8 @@ void RubixCube::rotate_row(size_t n){
     cubes[2][n][1].row_switch();    cubes[1][n][0] = cubes[2][n][1];
     cubes[1][n][2].row_switch();    cubes[2][n][1] = cubes[1][n][2];
     temp.row_switch();              cubes[1][n][2] = temp;
+
+    cubes[1][n][1].row_switch();
 }
 
 
@@ -94,6 +98,8 @@ void RubixCube::rotate_level(size_t n){
     cubes[2][1][n].level_switch();  cubes[1][0][n] = cubes[2][1][n];
     cubes[1][2][n].level_switch();  cubes[2][1][n] = cubes[1][2][n];
     temp.level_switch();            cubes[1][2][n] = temp;
+
+    cubes[1][1][n].level_switch();
 }
 
 void RubixCube::display(size_t x, size_t y, size_t z){
