@@ -23,7 +23,7 @@ RubixCube *main_cube;
 void display();
 
 
-void init (void) 
+void init() 
 {
     glEnable(GL_DEPTH_TEST);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -36,6 +36,7 @@ void init_cube(){
 }
 
 
+// Arrow keys to rotate our view.
 void specialKeys( int key, int x, int y ) {
     switch(key){
         case GLUT_KEY_RIGHT:
@@ -56,6 +57,7 @@ void specialKeys( int key, int x, int y ) {
 }
 
 
+// make the rotation effect when rotating a slice
 void rotate_animation(GLfloat step){
     for(int i = 0; i < 90/step * 100; i+=1){
         if(i % 100 == 0){
@@ -68,13 +70,13 @@ void rotate_animation(GLfloat step){
 
 
 void reshape(int w, int h){
-    glViewport(0,0,w,h);
+    glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45.0,(double)w/(double)h,1.0,200);
-    gluLookAt(0.0f,5.5f, 15.0f,
-              0.0f,0.0f,0.0f,
-              0.0f,1.0f,0.0f);
+    gluPerspective(45.0, w/(double)h, 1.0, 200);
+    gluLookAt(0.0,5.5, 15.0,
+              0.0,0.0,0.0,
+              0.0,1.0,0.0);
 }
 
 
@@ -137,7 +139,7 @@ void keyboard(unsigned char key, int x, int y){
 }
 
 
-void display(void){
+void display(){
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -154,6 +156,10 @@ void display(void){
         for(GLint y = 0; y < 3; y += 1){
             for(GLint z = 0; z < 3; z += 1){
                 glPushMatrix();
+
+                // We don't "really" rotate the cubes.
+                // Instead, we rotate a slice, and immediately reposition all small cubes after 
+                // switching their colors. 
 
                 glTranslatef(3.1, 3.1, 3.1);
                 if(x < 1){
@@ -192,12 +198,6 @@ void display(void){
     glutSwapBuffers();
 }
     
-
-
-void setupRC(){
-    GLfloat camRotX{350.0f};
-}
-
 
 int main(int argc, char *argv[]){
     glutInit(&argc, argv);

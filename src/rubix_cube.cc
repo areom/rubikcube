@@ -1,5 +1,6 @@
 #include "rubix_cube.h"
 
+// Initialize the colors
 SinglePiece::SinglePiece(){
     color[0] = RED;         //FRONT
     color[1] = ORANGE;      //BACK
@@ -9,7 +10,8 @@ SinglePiece::SinglePiece(){
     color[5] = WHITE;       //BOTTOM
 }
 
-
+// Define the behavior of a small cube whe rotating a column.
+// x is constant
 void SinglePiece::column_switch(){
     Color temp{color[0]};
     color[0] = color[5];
@@ -19,6 +21,8 @@ void SinglePiece::column_switch(){
 }
 
 
+// Define the behavior of a small cube whe rotating a row.
+// y is constant
 void SinglePiece::row_switch(){
     Color temp{color[0]};
     color[0] = color[3];
@@ -28,6 +32,8 @@ void SinglePiece::row_switch(){
 }
 
 
+// Define the behavior of a small cube whe rotating a level.
+// z is constant
 void SinglePiece::level_switch(){
     Color temp{color[4]};
     color[4] = color[3];
@@ -37,6 +43,7 @@ void SinglePiece::level_switch(){
 }
 
 
+// Initialize the 9 cubes
 RubixCube::RubixCube(){
     for(int x = 0; x < 3; x++){
         for(int y = 0; y < 3; y++){
@@ -49,6 +56,9 @@ RubixCube::RubixCube(){
 }
 
 
+// Rotate a slice:
+// 1.switch small cubes' colors
+// 2.rotate the 3x3 cube matrix
 void RubixCube::rotate_column(size_t n){
     // x == n
     SinglePiece temp = cubes[n][0][0];
@@ -101,6 +111,7 @@ void RubixCube::rotate_level(size_t n){
 
     cubes[1][1][n].level_switch();
 }
+
 
 void RubixCube::display(size_t x, size_t y, size_t z){
     // FRONT

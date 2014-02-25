@@ -19,6 +19,7 @@ typedef enum _Color{
 }Color;
 
 
+// Each small cube of the big cube is a separate instance.
 class SinglePiece{
     public:
         SinglePiece();
@@ -28,17 +29,18 @@ class SinglePiece{
         void level_switch();
 };
 
+// The 3x3 Rubik's Cube
 class RubixCube{
     public:
         RubixCube();
         void rotate_column(size_t n);
         void rotate_row(size_t n);
         void rotate_level(size_t n);
-        void display(size_t x, size_t y, size_t z);
+        void display(size_t x, size_t y, size_t z); // display a specific single cube
     
     private:
         SinglePiece cubes[3][3][3];
-        void display_color(Color c);
+        void display_color(Color c); // set the colors before drawing a cube
 };
 
 #endif
