@@ -98,7 +98,7 @@ void RubixCube::rotate_level(size_t n){
 
 void RubixCube::display(size_t x, size_t y, size_t z){
     // FRONT
-    SinglePiece p = cubes[x][y][z];
+    SinglePiece p{cubes[x][y][z]};
 
     glBegin(GL_POLYGON);
         display_color(p.color[0]);
