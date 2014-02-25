@@ -22,7 +22,6 @@ all: run
 
 run: 
 	$(CC) $(FLAG) $(EXE) $(INCLUDE) $(SRC) $(GLFramework)
-	#clang++ -std=c++11 -stdlib=libc++ -framework GLUT -framework OpenGL -Wno-deprecated rubix_cube.o main.o -o rubik
 
 clean:
 	rm *.o *.out
